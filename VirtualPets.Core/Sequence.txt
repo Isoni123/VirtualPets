@@ -1,0 +1,91 @@
+﻿title Virtual Pets Sequence Diagram
+begin Program, Controller, Model, View
+
+Program-> Controller:  Start
+
+Controller -> View: Show Welcome and message about Pet with number of lives #3
+Controller ->View:Show the Pet with the randomly generated  mood
+
+Model ->Model: Randomly Generate Pet Mood and save Pet Mood
+Controller ->Model:Fetch Pet Moods
+Model -> Controller: Return Pet Mood
+Controller -> View: Show Pet with random Moods
+
+Controller -> View: Ask user to interact with Pet
+Model ->Model:Have different methods User can use to improve mood
+Controller ->Model: Fetch the different methods
+Model ->Controller: Return different interaction options
+
+Controller ->View: Display the different interaction options to the User
+View-> View: Wait for User to enter an interaction
+Program ->View: User inputs their interaction with Pet
+View -> Controller:Returns the User input interaction
+
+Controller ->Model: Does the User interaction affect the Pet emotion?
+Model->Model:Check whether the interaction improves the Pets emotion
+Model ->Controller: Return Yes or No or True or False
+
+if {yes/true}
+Model->Model: Adjust emotions to lowest emotion
+Model -> Controller:Return Pet with lowest emotion
+Controller ->View:  Congratulate User and Show the Pet with lowest emotions
+Model ->Model: Randomly Generate Pet Mood and save Pet Mood
+Controller ->Model:Fetch Pet Moods
+Model -> Controller: Return Pet Mood
+Controller -> View: Show Pet with random Moods
+View ->View: Wait for 10 secs then refresh screen with Pet and newly generated moods
+
+else if {no/false}
+Controller->Controller:Increase the Pet Emotion so they are ill, eg level 4 to 9
+Model ->Model: Randomly Generate Pet Mood and save Pet Mood
+Controller ->Model:Fetch Pet Moods
+Model -> Controller: Return Pet Mood
+Controller -> View: Show Pet with random Moods
+View ->View: Wait for 10 secs then refresh screen with Pet and newly generated emotions
+
+else if {Pet is not in good condition}
+Controller -> View: Show invitation to a short game to User, to offer a chance to save Pet's life
+View ->View: Wait for the User to enter Yes/No
+View ->Controller:Return User input
+
+if {yes}
+Controller ->View: Show a riddle to the User ask for answer
+View ->View:Wait for User to enter and answer
+View->Controller:Returns User answer to the riddle
+Controller ->Model: Check the answer to the riddle
+Model->Model: Check if answer is correct
+Model ->Controller :Return yes or no or true or false
+
+else if {false/no}
+Controller ->Controller:Kill Pet
+Model -> Model: Randomly Generate Pet Mood and save Pet Mood
+Controller ->Model:Fetch Pet Moods
+Model ->Controller: Return Pet with Moods
+View ->View: Wait for 10 secs then refresh screen with Pet and newly generated moods
+
+else if {true/yes}
+Controller -> Model:Request the emotions to minimum level
+Model ->Model: Ajust emotions to minimum level
+Model->Controller: Return a pet with minimum levels of emotions
+Controller ->View:Show thank you message to User
+Model ->Model: Randomly Generate Pet Mood and save Pet Mood
+Controller ->Model:Fetch Pet Moods
+Model -> Controller: Return Pet Mood
+Controller -> View: Show Pet with random Moods
+View ->View: Wait for 10 secs then refresh screen with Pet and newly generated moods
+
+
+else
+Controller ->Controller: Kill Pet
+Model -> Model: Randomly Generate Pet Mood and save Pet Mood
+Controller ->Model:Fetch Pet Moods
+Model ->Controller: Return Pet with Moods
+View ->View: Wait for 10 secs then refresh screen with Pet and newly generated moods
+
+end
+end
+
+Controller ->View:Show the User You lost, your Pet is dead.
+terminators bar
+
+
